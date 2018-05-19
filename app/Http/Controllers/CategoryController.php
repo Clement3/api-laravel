@@ -16,7 +16,7 @@ class CategoryController extends Controller
         return new CategoryCollection($categories);
     }
 
-    public function items(\App\Category $category)
+    public function items(Category $category)
     {
         return new CategoryResource($category->load('items'));
     }

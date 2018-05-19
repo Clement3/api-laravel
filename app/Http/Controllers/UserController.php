@@ -8,17 +8,17 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function show(\App\User $user)
+    public function show(User $user)
     {
         return new UserResource($user);
     }
 
-    public function showWithItems(\App\User $user)
+    public function showWithItems(User $user)
     {
         return new UserResource($user->load('items.parentCategory', 'items.childCategory')); 
     }
 
-    public function showWithProfile(\App\User $user)
+    public function showWithProfile(User $user)
     {
         return new UserResource($user->load('profile')); 
     }        

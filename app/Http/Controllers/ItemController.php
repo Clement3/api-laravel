@@ -22,7 +22,7 @@ class ItemController extends Controller
         return new ItemCollection($items);
     }
 
-    public function show(\App\Item $item)
+    public function show(Item $item)
     {
         return new ItemResource($item->load('user', 'parentCategory', 'childCategory'));
     }
@@ -36,7 +36,7 @@ class ItemController extends Controller
             'child_category' => 'required|exists:categories,id'
         ]);
 
-        $item = new \App\Item([
+        $item = new Item([
             'slug' => str_slug($request->input('title')),
             'title' => $request->input('title'),
             'body' => $request->input('body'),

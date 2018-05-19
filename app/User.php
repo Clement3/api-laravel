@@ -67,6 +67,14 @@ class User extends Authenticatable
     }    
     
     /**
+     * Get the items for the user.
+     */
+    public function bookmarks()
+    {
+        return $this->hasMany('App\Bookmark');
+    }
+
+    /**
      * Laravel\Passport\Bridge\UserRepository
      * Add condition to this existing function
      * Check if the user is actived and confirmed
