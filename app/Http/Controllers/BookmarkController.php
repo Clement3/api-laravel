@@ -31,9 +31,11 @@ class BookmarkController extends Controller
 
     public function create(Item $item)
     {
-        $bookmark = new Bookmark(['item_id' => $item->id]);
+        $this->authorize('create', $item);
 
         $user = Auth::user();
+
+        $bookmark = new Bookmark(['item_id' => $item->id]);
 
         $user->bookmarks()->save($bookmark);
 
@@ -48,12 +50,20 @@ class BookmarkController extends Controller
     {
         $user = Auth::user();
 
-        $user->bookmarks()->where('item_id', $item->id)->delete();
+        $bookmark = Bookmark::where('item_id', $item->id)->where('user_id', $user->id)->delete();
+
+        if ($bookmark) {
+            return response()->json([
+                'version' => config('api.version'),
+                'status' => true,
+                'message' => __('bookmark.deleted', ['title' => $item->title])
+            ], 200);    
+        }
 
         return response()->json([
             'version' => config('api.version'),
-            'status' => true,
-            'message' => __('bookmark.deleted', ['title' => $item->title])
-        ], 200);        
+            'status' => false,
+            'message' => __('bookmark.not_found')
+        ], 404);            
     }
 }
