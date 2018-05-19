@@ -18,5 +18,6 @@ return [
     'sent' => 'We have e-mailed your password reset link!',
     'token' => 'This password reset token is invalid.',
     'user' => "We can't find a user with that e-mail address.",
-
+    'not_sent' => "Internal Problem, retry later.",
+    'not_reset' => "Internal Problem, retry later."
 ];

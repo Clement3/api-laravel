@@ -70,7 +70,7 @@ class RegisterController extends Controller
         return response()->json([
             'version' => config('api.version'),
             'status' => true,
-            'message' => 'User has been created'
-        ], 200);
+            'message' => __('auth.created')
+        ], 201);
     }    
 }

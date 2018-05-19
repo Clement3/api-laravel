@@ -39,12 +39,12 @@ class ResetPasswordController extends Controller
 			? response()->json([
                 'version' => config('api.version'),
                 'status' => true,
-                'message' => 'Your password has been modified.'
+                'message' => __('passwords.reset')
             ], 201)
 			: response()->json([
                 'version' => config('api.version'),
                 'status' => false,
-                'message' => 'Problem with the request, password not modified.'
+                'message' => __('passwords.not_reset')
             ], 401);
 	} 
 }

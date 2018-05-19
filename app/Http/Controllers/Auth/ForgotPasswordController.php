@@ -37,12 +37,12 @@ class ForgotPasswordController extends Controller
 			? response()->json([
                 'version' => config('api.version'),
                 'status' => true,
-                'message' => 'Reset link sent to your email.'
+                'message' => __('passwords.sent')
             ], 201)
 			: response()->json([
                 'version' => config('api.version'),
                 'status' => false,
-                'message' => 'Unable to send reset link'
+                'message' => __('passwords.not_sent')
             ], 401);
 	}    
 }

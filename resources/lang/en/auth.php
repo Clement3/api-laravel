@@ -15,5 +15,7 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
+    'not_confirmed' => 'Your account is not confirmed.',
+    'not_actived' => 'Your account has been disabled.',
+    'created' => 'Your account has been created, an email has been sent to confirm your account.',
 ];
