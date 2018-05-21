@@ -21,7 +21,8 @@ class CreateItemsTable extends Migration
             $table->unsignedInteger('child_category_id');
             $table->string('title');
             $table->text('body');
-            $table->timestamps();
+            $table->softDeletesTz();
+            $table->timestampsTz();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('parent_category_id')->references('id')->on('categories');

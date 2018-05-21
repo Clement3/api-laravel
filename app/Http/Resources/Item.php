@@ -21,9 +21,11 @@ class Item extends JsonResource
             'title' => $this->title,
             'body' => $this->body,
             'created_at' => $this->created_at,
+            'deleted_at' => $this->deleted_at,
             'user' => new UserResource($this->whenLoaded('user')),
             'parent_category' => new CategoryResource($this->whenLoaded('parentCategory')),
-            'child_category' => new CategoryResource($this->whenLoaded('childCategory'))
+            'child_category' => new CategoryResource($this->whenLoaded('childCategory')),
+
         ];
     }
     

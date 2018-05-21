@@ -18,7 +18,7 @@ class BookmarkController extends Controller
     public function index()
     {
         $user = Auth::user();
-
+        
         $bookmarks = $user->bookmarks()->with(
             'item', 
             'item.user', 
@@ -28,7 +28,7 @@ class BookmarkController extends Controller
     
         return new BookmarkCollection($bookmarks);
     }
-
+    
     public function create(Item $item)
     {
         $this->authorize('create', $item);
@@ -50,8 +50,8 @@ class BookmarkController extends Controller
     {
         $user = Auth::user();
 
-        $bookmark = Bookmark::where('item_id', $item->id)->where('user_id', $user->id)->delete();
-
+        $bookmark = $user->bookmarks()->where('user_id', $user->id)->delete();
+        
         if ($bookmark) {
             return response()->json([
                 'version' => config('api.version'),

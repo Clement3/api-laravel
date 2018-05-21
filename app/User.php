@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
@@ -10,7 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, Notifiable;
+    use HasApiTokens, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -67,7 +68,7 @@ class User extends Authenticatable
     }    
     
     /**
-     * Get the items for the user.
+     * Get the bookmarks for the user.
      */
     public function bookmarks()
     {

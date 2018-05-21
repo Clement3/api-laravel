@@ -22,7 +22,8 @@ class CreateUsersTable extends Migration
             $table->boolean('is_confirmed')->default(false);
             $table->string('confirmation_token', 25)->nullable()->unique();
             $table->rememberToken();
-            $table->timestamps();
+            $table->softDeletesTz();
+            $table->timestampsTz();
         });
     }
 

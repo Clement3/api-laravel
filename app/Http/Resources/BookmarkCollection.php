@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Item as ItemResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class BookmarkCollection extends ResourceCollection

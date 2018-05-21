@@ -17,11 +17,11 @@ class CreateBookmarksTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('item_id');
-            $table->timestamps();
-        });
+            $table->timestampsTz();
 
-        $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+        });
     }
 
     /**

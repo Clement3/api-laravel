@@ -23,7 +23,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Route::bind('item', function ($slug) {
+            return \App\Item::withTrashed()->where('slug', $slug)->first();
+        });
 
         parent::boot();
     }

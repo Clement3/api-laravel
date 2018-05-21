@@ -2,10 +2,13 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
+    use SoftDeletes;
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -34,11 +37,11 @@ class Item extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User')->withTrashed();
     }
 
     /**
-     * Get the parent category that owns the item.
+     * Get the parent category for the item.
      */
     public function parentCategory()
     {
@@ -46,10 +49,18 @@ class Item extends Model
     }
 
     /**
-     * Get the children category that owns the item.
+     * Get the children category for the item.
      */
     public function childCategory()
     {
         return $this->hasOne('App\Category', 'id', 'child_category_id');
-    }                  
+    } 
+    
+    /**
+     * Count how many bookmarks for the item.
+     */
+    public function countBookmarks()
+    {
+        return $this->hasMany('App\Bookmark')->count();
+    }
 }

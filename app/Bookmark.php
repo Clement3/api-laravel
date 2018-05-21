@@ -20,7 +20,7 @@ class Bookmark extends Model
      */
     public function item()
     {
-        return $this->belongsTo('App\Item');
+        return $this->belongsTo('App\Item')->withTrashed();
     }
 
     /**
@@ -29,5 +29,5 @@ class Bookmark extends Model
     public function user()
     {
         return $this->belongsTo('App\User');
-    }  
+    }
 }
