@@ -2,10 +2,12 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Mail\ResetPassword;
 use League\OAuth2\Server\Exception\OAuthServerException;
-use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -19,7 +21,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 
+        'email', 
+        'password',
     ];
 
     /**
@@ -28,7 +32,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 
+        'remember_token',
+        'email',
     ];
 
     /**
@@ -76,6 +82,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Mark the user's account as confirmed.
+     */
+    public function confirm()
+    {
+        $this->is_confirmed = true;
+        $this->confirmation_token = null;
+        $this->save();
+    }
+
+    /**
      * Laravel\Passport\Bridge\UserRepository
      * Add condition to this existing function
      * Check if the user is actived and confirmed
@@ -94,4 +110,15 @@ class User extends Authenticatable
             throw new OAuthServerException(__('auth.not_confirmed'), 6, 'user_unconfirmed', 401);          
         }
     }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        Mail::to($this)->send(new ResetPassword($this, $token));
+    }    
 }

@@ -44,5 +44,5 @@ class ForgotPasswordController extends Controller
                 'status' => false,
                 'message' => __('passwords.not_sent')
             ], 401);
-	}    
+    }
 }

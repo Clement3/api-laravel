@@ -19,5 +19,8 @@ return [
     'token' => 'This password reset token is invalid.',
     'user' => "We can't find a user with that e-mail address.",
     'not_sent' => "Internal Problem, retry later.",
-    'not_reset' => "Internal Problem, retry later."
+    'not_reset' => "Internal Problem, retry later.",
+    'mail_line1' => "You are receiving this email because we received a password reset request for your account.",
+    'mail_action' => "Reset Password",
+    'mail_line2' => "If you did not request a password reset, no further action is required.",
 ];

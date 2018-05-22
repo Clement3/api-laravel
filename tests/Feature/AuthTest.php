@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -34,6 +35,8 @@ class AuthTest extends TestCase
      */
     public function testForgotPassword()
     {
+        Mail::fake();
+        
         $response = $this->json('POST', '/api/password/email', [
             'email' => 'teardown@test.com'
         ]);

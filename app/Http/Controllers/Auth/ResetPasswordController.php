@@ -46,5 +46,5 @@ class ResetPasswordController extends Controller
                 'status' => false,
                 'message' => __('passwords.not_reset')
             ], 401);
-	} 
+    }
 }
