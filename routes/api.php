@@ -34,4 +34,4 @@ Route::get('/user/{user}/items', 'UserController@showWithItems')->name('user.ite
 
 Route::get('/bookmarks', 'BookmarkController@index')->name('bookmarks');
 Route::get('/bookmark/{item}/create', 'BookmarkController@create')->name('bookmark.create');
-Route::delete('/bookmark/{item}/delete', 'BookmarkController@delete')->name('bookmark.delete');
+Route::delete('/bookmark/{item_softdelete}/delete', 'BookmarkController@delete')->name('bookmark.delete');
