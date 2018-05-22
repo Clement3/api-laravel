@@ -12,14 +12,7 @@ class ResetPassword extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     /**
-     * The user associated with the email.
-     *
-     * @var \App\User
-     */
-    public $user;
-
-    /**
-     * The token for resseting password.
+     * The token to reset the password.
      */
     private $token;
 
@@ -28,9 +21,8 @@ class ResetPassword extends Mailable implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($user, $token)
+    public function __construct($token)
     {
-        $this->user = $user;
         $this->token = $token;
     }
 
