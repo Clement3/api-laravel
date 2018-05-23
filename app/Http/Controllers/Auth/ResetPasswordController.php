@@ -40,7 +40,7 @@ class ResetPasswordController extends Controller
                 'version' => config('api.version'),
                 'status' => true,
                 'message' => __('passwords.reset')
-            ], 201)
+            ], 200)
 			: response()->json([
                 'version' => config('api.version'),
                 'status' => false,

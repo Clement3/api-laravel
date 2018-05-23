@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/register', 'Auth\RegisterController@register')->name('register');
+Route::post('/register', 'Auth\RegisterController@register')->name('register')->middleware('localization');
 Route::get('/register/confirm', 'Auth\RegisterConfirmationController')->name('register.confirm');
 Route::post('/password/email', 'Auth\ForgotPasswordController')->name('password.email');
 Route::post('/password/reset', 'Auth\ResetPasswordController')->name('password.reset');
