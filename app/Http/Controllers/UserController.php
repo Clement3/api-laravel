@@ -16,10 +16,5 @@ class UserController extends Controller
     public function showWithItems(User $user)
     {
         return new UserResource($user->load('items.parentCategory', 'items.childCategory')); 
-    }
-
-    public function showWithProfile(User $user)
-    {
-        return new UserResource($user->load('profile')); 
     }        
 }

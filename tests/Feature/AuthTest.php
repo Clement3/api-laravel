@@ -39,11 +39,11 @@ class AuthTest extends TestCase
     }
 
     /** @test */
-    public function an_user_cant_login_if_not_actived()
+    public function an_user_cant_login_if_not_activated()
     {
         $user = factory(User::class)->create([
             'is_confirmed' => 1,
-            'is_actived' => 0
+            'is_activated' => 0
         ]);
 
         Artisan::call('passport:install');
@@ -151,7 +151,7 @@ class AuthTest extends TestCase
     }
 
     /** @test */
-    public function an_user_can_forgot_his_password()
+    public function an_user_can_forget_his_password()
     {
         Mail::fake();
         

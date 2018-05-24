@@ -100,11 +100,11 @@ class User extends Authenticatable
     {
         if (Hash::check($password, $this->getAuthPassword())) {
             if ($this->is_confirmed) {
-                if ($this->is_actived) {
+                if ($this->is_activated) {
                     return true;
                 } 
 
-                throw new OAuthServerException(__('auth.not_actived'), 6, 'user_inactive', 401);
+                throw new OAuthServerException(__('auth.not_activated'), 6, 'user_inactive', 401);
             }
 
             throw new OAuthServerException(__('auth.not_confirmed'), 6, 'user_unconfirmed', 401);          

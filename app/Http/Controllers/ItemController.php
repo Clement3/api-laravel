@@ -54,4 +54,14 @@ class ItemController extends Controller
             'message' => 'Item create with success.'
         ], 201);
     }
+
+    public function update(Item $item)
+    {
+
+    }
+
+    public function delete(Item $item)
+    {
+        
+    }
 }
