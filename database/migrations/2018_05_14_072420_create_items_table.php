@@ -21,6 +21,8 @@ class CreateItemsTable extends Migration
             $table->unsignedInteger('child_category_id');
             $table->string('title');
             $table->text('body');
+            $table->dateTimeTz('edited_at')->nullable();
+            $table->boolean('is_activated')->default(false);
             $table->softDeletesTz();
             $table->timestampsTz();
 

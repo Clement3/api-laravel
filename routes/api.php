@@ -42,3 +42,13 @@ Route::middleware(['localization'])->group(function () {
     Route::get('/bookmark/{item}/create', 'BookmarkController@create')->name('bookmark.create');
     Route::delete('/bookmark/{item_softdelete}/delete', 'BookmarkController@delete')->name('bookmark.delete');
 });
+
+Route::get('/foo', function () {
+    $date_edition = Carbon\Carbon::parse('11 april 1994')->addDays(7);
+    $date_now = Carbon\Carbon::parse('16 april 1994');
+    if ($date_now >= $date_edition) {
+        return 'Vrai!';
+    } 
+
+    return 'Faux !';
+});

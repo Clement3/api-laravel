@@ -55,9 +55,38 @@ class ItemController extends Controller
         ], 201);
     }
 
-    public function update(Item $item)
+    public function update(Request $request, Item $item)
     {
+        if (is_null($item->edited_at) && now() >= Carbon\Carbon::parse($item->edited_at)->addDays(7)) {
+            
+            $request->validate([
+                'title' => 'bail|required|max:60',
+                'body' => 'required',
+                'parent_category' => 'required|exists:categories,id',
+                'child_category' => 'required|exists:categories,id'
+            ]);
+    
+            $item->title = $request->input('title');
+            $item->body = $request->input('body');
+            $item->parent_category_id = $request->input('parent_category');
+            $item->child_category_id = $request->input('child_category');
+            $item->edited_at = now();
+            $item->is_activated = false;
+    
+            $item->save();
+    
+            return response()->json([
+                'version' => config('api.version'),
+                'status' => true,
+                'message' => 'The item has been edited.'
+            ], 200);
+        }
 
+        return response()->json([
+            'version' => config('api.version'),
+            'status' => false,
+            'message' => 'You already edited your ad. You have to wait :time'
+        ], 401);
     }
 
     public function delete(Item $item)
