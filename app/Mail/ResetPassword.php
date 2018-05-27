@@ -33,8 +33,10 @@ class ResetPassword extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->markdown('emails.reset-password')->with([
-            'token' => $this->token
-        ]);
+        return $this->markdown('emails.reset-password')
+                    ->subject(__('passwords.mail.action'))
+                    ->with([
+                        'url' => config('api.frontend_url') . '/password/reset?token=' . $this->token
+                    ]);
     }
 }

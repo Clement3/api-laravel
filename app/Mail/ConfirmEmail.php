@@ -35,6 +35,10 @@ class ConfirmEmail extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->markdown('emails.confirm-email');
+        return $this->markdown('emails.confirm-email')
+                    ->subject(__('auth.mail.action'))
+                    ->with([
+                            'url' => config('api.frontend_url') . '/register/confirm?token=' . $this->user->confirmation_token
+                    ]);
     }
 }

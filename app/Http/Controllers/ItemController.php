@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Item;
 use App\Http\Resources\ItemCollection;
 use App\Http\Resources\Item as ItemResource;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -57,13 +58,14 @@ class ItemController extends Controller
 
     public function update(Request $request, Item $item)
     {
-        if (is_null($item->edited_at) && now() >= Carbon\Carbon::parse($item->edited_at)->addDays(7)) {
+        if (is_null($item->verified_at) || now() >= Carbon::parse($item->edited_at)->addDays(7)) {
             
+            // Validation Custom : child_category -> le parent est bien le parent de l'enfant
             $request->validate([
-                'title' => 'bail|required|max:60',
-                'body' => 'required',
-                'parent_category' => 'required|exists:categories,id',
-                'child_category' => 'required|exists:categories,id'
+                'title' => 'bail|max:60',
+                'body' => '',
+                'parent_category' => 'exists:categories,id',
+                'child_category' => 'exists:categories,id'
             ]);
     
             $item->title = $request->input('title');
@@ -71,8 +73,8 @@ class ItemController extends Controller
             $item->parent_category_id = $request->input('parent_category');
             $item->child_category_id = $request->input('child_category');
             $item->edited_at = now();
-            $item->is_activated = false;
-    
+            $item->verified_at = null;
+
             $item->save();
     
             return response()->json([

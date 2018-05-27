@@ -15,9 +15,15 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'not_confirmed' => 'Your account is not confirmed.',
-    'not_actived' => 'Your account has been disabled.',
-    'created' => 'Votre compte à été créer !',
-    'register_confirmation' => 'Your e-mail is now confirmed !',
-    'error_register_confirmation' => 'Token is invalid.',
+    'not_confirmed' => 'Vous devez confirmer votre compte. Vérifier votre boites aux lettres.',
+    'not_activated' => 'Votre compte à été désactiver.',
+    'created' => 'Votre compte a été créé, un e-mail a été envoyé pour confirmer votre compte.',
+    'register_confirmation' => 'Votre e-mail est maintenant confirmer.',
+    'error_register_confirmation' => 'Le token est invalide.',
+
+    'mail' => [
+        'hello' => 'Une dernière étape',
+        'line1' => 'Nous avons juste besoin que vous confirmez votre e-mail pour prouver que vous êtes un humain.',
+        'action' => 'Confirmez votre e-mail'
+    ]
 ];

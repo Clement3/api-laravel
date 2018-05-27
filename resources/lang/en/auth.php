@@ -20,4 +20,10 @@ return [
     'created' => 'Your account has been created, an email has been sent to confirm your account.',
     'register_confirmation' => 'Your e-mail is now confirmed !',
     'error_register_confirmation' => 'Token is invalid.',
+
+    'mail' => [
+        'hello' => 'One Last Step',
+        'line1' => 'We just need you to confirm your email address to prove that you\'re a human. You get it, right? Coo',
+        'action' => 'Confirm Email'
+    ]
 ];

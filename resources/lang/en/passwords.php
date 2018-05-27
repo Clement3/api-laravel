@@ -18,7 +18,10 @@ return [
     'sent' => 'We have e-mailed your password reset link!',
     'not_sent' => "We can't find a user with that e-mail address.",
     'not_reset' => "This password reset token is invalid.",
-    'mail_line1' => "You are receiving this email because we received a password reset request for your account.",
-    'mail_action' => "Reset Password",
-    'mail_line2' => "If you did not request a password reset, no further action is required.",
+
+    'mail' => [
+        'line1' => 'You are receiving this email because we received a password reset request for your account.',
+        'action' => 'Reset Password',
+        'line2' => 'If you did not request a password reset, no further action is required.',
+    ]
 ];

@@ -1,19 +1,19 @@
 @component('mail::message')
-# Hello
+# @lang('mail.hello')
 
-You are receiving this email because we received a password reset request for your account.
+@lang('passwords.mail.line1')
 
-@component('mail::button', ['url' => url(config('api.frontend_url') . '/password/reset?token=' . $token)])
-Reset Password
+@component('mail::button', ['url' => url($url)])
+@lang('passwords.mail.action')
 @endcomponent
 
-If you did not request a password reset, no further action is required.
+@lang('passwords.mail.line2')
 <br>
 
-Thanks,<br>
+@lang('mail.thanks')<br>
 {{ config('app.name') }}
 
 @component('mail::subcopy')
-If you’re having trouble clicking the "Reset Password" button, copy and paste the URL below into your web browser: {{ config('api.frontend_url') . '/password/reset?token=' . $token }}
+@lang('mail.subcopy', ['action' => __('passwords.mail.action'), 'url' => $url])
 @endcomponent
 @endcomponent

@@ -63,4 +63,9 @@ class Item extends Model
     {
         return $this->hasMany('App\Bookmark')->count();
     }
+
+    public function isActive()
+    {
+        return is_null($this->selled_at) && !is_null($this->verified_at) && now() <= $this->expired_at;
+    }
 }

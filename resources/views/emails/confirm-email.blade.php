@@ -1,12 +1,16 @@
 @component('mail::message')
-# One Last Step
+# @lang('auth.mail.hello')
 
-We just need you to confirm your email address to prove that you're a human. You get it, right? Coo.
+@lang('auth.mail.line1')
 
-@component('mail::button', ['url' => url('/register/confirm?token=' . $user->confirmation_token)])
-Confirm Email
+@component('mail::button', ['url' => url($url)])
+@lang('auth.mail.action')
 @endcomponent
 
-Thanks,<br>
+@lang('mail.thanks')<br>
 {{ config('app.name') }}
+
+@component('mail::subcopy')
+@lang('mail.subcopy', ['action' => __('auth.mail.action'), 'url' => $url])
+@endcomponent
 @endcomponent
