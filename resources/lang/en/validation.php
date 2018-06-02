@@ -117,6 +117,11 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'parent_category' => 'main category',
+        'child_category' => 'sub-category'
+    ],
 
+    // Is a child of the parent
+    'is_a_child_of_the_parent' => 'The child category must be the child of the parent category',
 ];

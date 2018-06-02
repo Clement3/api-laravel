@@ -3,13 +3,13 @@
 namespace App\Observers;
 
 use App\Item;
-use Vinkla\Hashids\Facades\Hashids;
 
 class ItemObserver
 {
     /**
      * Listen to the Item creating event.
-     *
+     * Generate a random a slug
+     * 
      * @param  \App\Item  $item
      * @return void
      */

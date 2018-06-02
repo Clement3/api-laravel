@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Vinkla\Hashids\Facades\Hashids;
 use App\Item;
+use App\Rules\ChildCategory;
 use App\Http\Resources\ItemCollection;
 use App\Http\Resources\Item as ItemResource;
 use Carbon\Carbon;
@@ -35,14 +35,16 @@ class ItemController extends Controller
     {
         $request->validate([
             'title' => 'bail|required|max:60',
-            'body' => 'required',
+            'body' => 'required|max:1000',
+            'price' => 'required|integer',
             'parent_category' => 'required|exists:categories,id',
-            'child_category' => 'required|exists:categories,id'
+            'child_category' => ['required', 'exists:categories,id', new ChildCategory($request->parent_category)]
         ]);
 
         $item = new Item([
             'title' => $request->input('title'),
             'body' => $request->input('body'),
+            'price' => $request->input('price'),
             'parent_category_id' => $request->input('parent_category'),
             'child_category_id' => $request->input('child_category')
         ]);
