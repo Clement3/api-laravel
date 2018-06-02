@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Observers\ItemObserver;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Passport\Passport;
 
@@ -14,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \App\Item::observe(ItemObserver::class);
     }
 
     /**

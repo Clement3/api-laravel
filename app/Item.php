@@ -2,12 +2,13 @@
 
 namespace App;
 
+use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-    use SoftDeletes;
+    use Searchable, SoftDeletes;
     
     /**
      * The attributes that are mass assignable.
@@ -31,7 +32,30 @@ class Item extends Model
     {
         return 'slug';
     }
-        
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        return [
+            'title' => $this->title,
+            'body' => $this->body
+        ];
+    }
+
+    /**
+     * Scout - shouldBeSearchable
+     * 
+     * @return boolean
+     */
+    public function shouldBeSearchable()
+    {
+        return $this->isActive();
+    }
+
     /**
      * Get the user that owns the item.
      */

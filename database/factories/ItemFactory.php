@@ -7,6 +7,7 @@ $factory->define(App\Item::class, function (Faker $faker) {
     $parent_category_id = factory(App\Category::class)->create()->id;
     return [
         'slug' => str_slug($title),
+        'price' => $faker->numberBetween(100, 10000),
         'title' => $title,
         'body' => $faker->paragraph,
         'parent_category_id' => $parent_category_id,   

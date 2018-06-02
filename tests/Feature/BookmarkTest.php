@@ -12,6 +12,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class BookmarkTest extends TestCase
 {
+    use RefreshDatabase;
+    
     /** @test */
     public function an_user_have_bookmarks()
     {

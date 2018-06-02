@@ -21,6 +21,7 @@ class CreateItemsTable extends Migration
             $table->unsignedInteger('child_category_id');
             $table->string('title');
             $table->text('body');
+            $table->unsignedBigInteger('price');
             $table->dateTimeTz('edited_at')->nullable();
             $table->dateTimeTz('selled_at')->nullable();
             $table->dateTimeTz('verified_at')->nullable();

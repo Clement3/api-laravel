@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Vinkla\Hashids\Facades\Hashids;
 use App\Item;
 use App\Http\Resources\ItemCollection;
 use App\Http\Resources\Item as ItemResource;
@@ -16,10 +17,12 @@ class ItemController extends Controller
         $this->middleware('auth:api')->except('index', 'show');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $items = Item::with('user', 'childCategory', 'parentCategory')->paginate(10);
+        $items = Item::search($request->q)->paginate(10);
 
+        $items->load('user', 'childCategory', 'parentCategory');
+        
         return new ItemCollection($items);
     }
 
@@ -38,7 +41,6 @@ class ItemController extends Controller
         ]);
 
         $item = new Item([
-            'slug' => str_slug($request->input('title')),
             'title' => $request->input('title'),
             'body' => $request->input('body'),
             'parent_category_id' => $request->input('parent_category'),
