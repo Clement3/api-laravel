@@ -31,7 +31,7 @@ Route::middleware(['localization'])->group(function () {
     // Items
     Route::get('/items', 'ItemController@index')->name('items');
     Route::get('/item/{item}', 'ItemController@show')->name('item');
-    Route::post('/item/store', 'ItemController@store')->name('item.store');
+    Route::post('/item/create', 'ItemController@create')->name('item.create');
     Route::patch('/item/{item}/update', 'ItemController@update')->name('item.update');
     Route::delete('/item/{item}/delete', 'ItemController@delete')->name('item.delete');
 

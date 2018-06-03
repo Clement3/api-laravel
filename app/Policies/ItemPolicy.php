@@ -18,7 +18,7 @@ class ItemPolicy
      */
     public function create(User $user)
     {
-        // Check if the user is confirmed
+        return $user->is_confirmed && $user->is_activated;
     }
 
     /**

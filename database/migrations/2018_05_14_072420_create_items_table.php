@@ -25,7 +25,7 @@ class CreateItemsTable extends Migration
             $table->dateTimeTz('edited_at')->nullable();
             $table->dateTimeTz('selled_at')->nullable();
             $table->dateTimeTz('verified_at')->nullable();
-            $table->dateTimeTz('expired_at')->nullable();
+            $table->dateTimeTz('expired_at');
             $table->softDeletesTz();
             $table->timestampsTz();
 

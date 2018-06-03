@@ -31,14 +31,16 @@ class ItemController extends Controller
         return new ItemResource($item->load('user', 'parentCategory', 'childCategory'));
     }
 
-    public function store(Request $request)
+    public function create(Request $request)
     {
+        $user = Auth::user();
+
         $request->validate([
-            'title' => 'bail|required|max:60',
+            'title' => 'required|max:60',
             'body' => 'required|max:1000',
             'price' => 'required|integer',
             'parent_category' => 'required|exists:categories,id',
-            'child_category' => ['required', 'exists:categories,id', new ChildCategory($request->parent_category)]
+            'child_category' => ['required', 'exists:categories,id', new ChildCategory(intval($request->input('parent_category')))]
         ]);
 
         $item = new Item([
@@ -48,8 +50,6 @@ class ItemController extends Controller
             'parent_category_id' => $request->input('parent_category'),
             'child_category_id' => $request->input('child_category')
         ]);
-
-        $user = Auth::user();
         
         $user->items()->save($item);
 
@@ -62,20 +62,19 @@ class ItemController extends Controller
 
     public function update(Request $request, Item $item)
     {
+        $this->authorize('update', $item);
+
         if (is_null($item->verified_at) || now() >= Carbon::parse($item->edited_at)->addDays(7)) {
             
-            // Validation Custom : child_category -> le parent est bien le parent de l'enfant
             $request->validate([
-                'title' => 'bail|max:60',
-                'body' => '',
-                'parent_category' => 'exists:categories,id',
-                'child_category' => 'exists:categories,id'
+                'title' => 'max:60',
+                'body' => 'max:1000',
+                'price' => 'integer'
             ]);
     
             $item->title = $request->input('title');
             $item->body = $request->input('body');
-            $item->parent_category_id = $request->input('parent_category');
-            $item->child_category_id = $request->input('child_category');
+            $item->price = $request->input('price');
             $item->edited_at = now();
             $item->verified_at = null;
 
@@ -97,6 +96,14 @@ class ItemController extends Controller
 
     public function delete(Item $item)
     {
-        
+        $this->authorize('delete', $item);
+
+        $item->delete();
+
+        return response()->json([
+            'version' => config('api.version'),
+            'status' => true,
+            'message' => 'The item has been deleted.'
+        ], 200);        
     }
 }

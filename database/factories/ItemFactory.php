@@ -15,6 +15,7 @@ $factory->define(App\Item::class, function (Faker $faker) {
             return factory(App\Category::class)->create([
                 'parent_id' => $parent_category_id
             ])->id;
-        }  
+        },
+        'expired_at' => \Carbon\Carbon::parse(now())->addDays(30)  
     ];
 });
