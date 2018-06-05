@@ -21,14 +21,14 @@ class ItemController extends Controller
     {
         $items = Item::search($request->q)->paginate(10);
 
-        $items->load('user', 'childCategory', 'parentCategory');
+        $items->load('user', 'category');
         
         return new ItemCollection($items);
     }
 
     public function show(Item $item)
     {
-        return new ItemResource($item->load('user', 'parentCategory', 'childCategory'));
+        return new ItemResource($item->load('user', 'category'));
     }
 
     public function create(Request $request)
@@ -39,16 +39,14 @@ class ItemController extends Controller
             'title' => 'required|max:60',
             'body' => 'required|max:1000',
             'price' => 'required|integer',
-            'parent_category' => 'required|exists:categories,id',
-            'child_category' => ['required', 'exists:categories,id', new ChildCategory(intval($request->input('parent_category')))]
+            'category' => 'required|exists:categories,id',
         ]);
 
         $item = new Item([
             'title' => $request->input('title'),
             'body' => $request->input('body'),
             'price' => $request->input('price'),
-            'parent_category_id' => $request->input('parent_category'),
-            'child_category_id' => $request->input('child_category')
+            'category' => $request->input('category'),
         ]);
         
         $user->items()->save($item);

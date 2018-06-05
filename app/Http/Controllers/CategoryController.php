@@ -11,13 +11,13 @@ class CategoryController extends Controller
 {   
     public function index()
     {
-        $categories = Category::with('childrens')->parents()->orderBy('name', 'asc')->get();
+        $categories = Category::with('childrens.childrens')->parents()->orderBy('name', 'asc')->get();
     
         return new CategoryCollection($categories);
     }
 
     public function items(Category $category)
     {
-        return new CategoryResource($category->load('items'));
+        return new CategoryResource($category->load('items', 'items.user', 'items.category'));
     }
 }

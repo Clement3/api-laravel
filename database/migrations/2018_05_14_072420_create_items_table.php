@@ -17,8 +17,7 @@ class CreateItemsTable extends Migration
             $table->increments('id');
             $table->string('slug')->unique();
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('parent_category_id');
-            $table->unsignedInteger('child_category_id');
+            $table->unsignedInteger('category_id');
             $table->string('title');
             $table->text('body');
             $table->unsignedBigInteger('price');
@@ -30,8 +29,7 @@ class CreateItemsTable extends Migration
             $table->timestampsTz();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('parent_category_id')->references('id')->on('categories');
-            $table->foreign('child_category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

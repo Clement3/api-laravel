@@ -45,11 +45,7 @@ class Category extends Model
      */    
     public function items()
     {
-        if (is_null($this->parent_id)) {
-            return $this->hasMany('App\Item', 'parent_category_id', 'id');
-        }
-
-        return $this->hasMany('App\Item', 'child_category_id', 'id');
+        return $this->hasManyThrough('App\Item', 'App\Category', 'parent_id', 'category_id', 'id', 'id');
     }
 
     /**
@@ -61,5 +57,10 @@ class Category extends Model
     public function scopeParents($query)
     {
         return $query->whereNull('parent_id');
-    }    
+    }
+
+    public function parent() 
+    {
+        return $this->hasOne('App\Category', 'id', 'parent_id');
+    }
 }

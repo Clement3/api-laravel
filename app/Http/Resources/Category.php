@@ -16,9 +16,10 @@ class Category extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'slug' => $this->slug,
             'name' => $this->name,
-            'childrens' => self::collection($this->when(is_null($this->parent_id), $this->whenLoaded('childrens'))),
+            'childrens' => self::collection($this->whenLoaded('childrens')),
             'items' => ItemResource::collection($this->whenLoaded('items'))  
         ];
     }

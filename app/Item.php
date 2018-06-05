@@ -19,8 +19,7 @@ class Item extends Model
         'slug', 
         'title', 
         'body', 
-        'parent_category_id', 
-        'child_category_id'
+        'category',
     ];
 
     /**
@@ -65,20 +64,12 @@ class Item extends Model
     }
 
     /**
-     * Get the parent category for the item.
+     * Get the category for the item.
      */
-    public function parentCategory()
+    public function category()
     {
-        return $this->hasOne('App\Category', 'id', 'parent_category_id');
+        return $this->belongsTo('App\Category');
     }
-
-    /**
-     * Get the children category for the item.
-     */
-    public function childCategory()
-    {
-        return $this->hasOne('App\Category', 'id', 'child_category_id');
-    } 
     
     /**
      * Count how many bookmarks for the item.

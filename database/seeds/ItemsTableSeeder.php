@@ -19,8 +19,7 @@ class ItemsTableSeeder extends Seeder
                 'title' => 'Item '.$i,
                 'body' => 'Contenu de l\'item',
                 'user_id' => $i,
-                'parent_category_id' => 1,
-                'child_category_id' => 7,
+                'category_id' =>  mt_rand(1, 11),
                 'created_at' => now(),
                 'verified_at' => now(),
                 'expired_at' => \Carbon\Carbon::parse(now())->addDays(30)
